@@ -1,3 +1,4 @@
+import GeneralInfoForm from "@/components/forms/GeneralInfoForm";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
@@ -16,7 +17,9 @@ const ResumeEditor: React.FC = () => {
 
       <main className="relative grow">
         <div className="absolute bottom-0 top-0 flex w-full">
-          <div className="w-full md:w-1/2">left</div>
+          <div className="w-full p-3 md:w-1/2">
+            <GeneralInfoForm />
+          </div>
 
           <div className="grow md:border-r" />
 
