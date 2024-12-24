@@ -1,11 +1,12 @@
-import GeneralInfoForm from "@/components/forms/GeneralInfoForm";
+import PersonalInfoForm from "@/components/forms/personal-info/PersonalInfoForm";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 
 const ResumeEditor: React.FC = () => {
   return (
-    <div className="flex h-full grow flex-col">
+    <div className="flex min-h-screen flex-col">
+      {/* HEADER */}
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
         <h1 className="text-2xl font-bold">Design your resume</h1>
         <p className="text-sm text-muted-foreground">
@@ -13,12 +14,13 @@ const ResumeEditor: React.FC = () => {
           saved automatically.
         </p>
       </header>
-      {/* MAIN */}
 
-      <main className="relative grow">
+      {/* MAIN */}
+      <main className="relative flex grow">
         <div className="absolute bottom-0 top-0 flex w-full">
           <div className="w-full p-3 md:w-1/2">
-            <GeneralInfoForm />
+            {/* <GeneralInfoForm /> */}
+            <PersonalInfoForm />
           </div>
 
           <div className="grow md:border-r" />
