@@ -7,7 +7,11 @@ export const metadata: Metadata = {
 };
 
 const EditorPage: React.FC = () => {
-  return <ResumeEditor />;
+  return (
+    <>
+      <ResumeEditor />
+    </>
+  );
 };
 
 export default EditorPage;

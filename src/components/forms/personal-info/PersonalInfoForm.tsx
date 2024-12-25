@@ -40,17 +40,13 @@ const PersonalInfoForm = () => {
   }, [form]);
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
+    <div className="mx-auto max-w-xl space-y-6">
       <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold">Personal Info</h2>
+        <h2 className="text-2xl font-semibold">Personal info</h2>
         <p className="text-sm text-muted-foreground">Tell us about yourself.</p>
       </div>
-
-      {/* Form */}
       <Form {...form}>
         <form className="space-y-3">
-          {/* PHOTO */}
-
           <FormField
             control={form.control}
             name="photo"
@@ -63,10 +59,10 @@ const PersonalInfoForm = () => {
                       {...fieldValues}
                       type="file"
                       accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        fieldValues.onChange(file);
-                      }}
+                      // onChange={(e) => {
+                      //   const file = e.target.files?.[0];
+                      //   fieldValues.onChange(file);
+                      // }}
                       // ref={photoInputRef}
                     />
                   </FormControl>
@@ -87,9 +83,7 @@ const PersonalInfoForm = () => {
               </FormItem>
             )}
           />
-
           <div className="grid grid-cols-2 gap-3">
-            {/* FIRST NAME */}
             <FormField
               control={form.control}
               name="firstName"
@@ -103,8 +97,6 @@ const PersonalInfoForm = () => {
                 </FormItem>
               )}
             />
-
-            {/* LAST NAME */}
             <FormField
               control={form.control}
               name="lastName"
@@ -119,8 +111,6 @@ const PersonalInfoForm = () => {
               )}
             />
           </div>
-
-          {/* JOB TITLE */}
           <FormField
             control={form.control}
             name="jobTitle"
@@ -134,8 +124,6 @@ const PersonalInfoForm = () => {
               </FormItem>
             )}
           />
-
-          {/* CITY */}
           <div className="grid grid-cols-2 gap-3">
             <FormField
               control={form.control}
@@ -150,9 +138,6 @@ const PersonalInfoForm = () => {
                 </FormItem>
               )}
             />
-
-            {/* COUNTRY */}
-
             <FormField
               control={form.control}
               name="country"
@@ -167,8 +152,6 @@ const PersonalInfoForm = () => {
               )}
             />
           </div>
-
-          {/* PHONE */}
           <FormField
             control={form.control}
             name="phone"
@@ -182,8 +165,6 @@ const PersonalInfoForm = () => {
               </FormItem>
             )}
           />
-
-          {/* EMAIL */}
           <FormField
             control={form.control}
             name="email"

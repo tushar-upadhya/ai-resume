@@ -5,8 +5,7 @@ import React from "react";
 
 const ResumeEditor: React.FC = () => {
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* HEADER */}
+    <div className="flex min-h-[48rem] flex-col">
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
         <h1 className="text-2xl font-bold">Design your resume</h1>
         <p className="text-sm text-muted-foreground">
@@ -14,12 +13,10 @@ const ResumeEditor: React.FC = () => {
           saved automatically.
         </p>
       </header>
-
       {/* MAIN */}
-      <main className="relative flex grow">
+      <main className="relative grow">
         <div className="absolute bottom-0 top-0 flex w-full">
-          <div className="w-full p-3 md:w-1/2">
-            {/* <GeneralInfoForm /> */}
+          <div className="w-full md:w-1/2">
             <PersonalInfoForm />
           </div>
 
@@ -36,10 +33,9 @@ const ResumeEditor: React.FC = () => {
             <Button variant={"secondary"}>Previous Step</Button>
             <Button>Next Step</Button>
           </div>
-
           <div className="flex items-center gap-3">
-            <Button asChild variant={"secondary"}>
-              <Link href={"/resumes"}>Close</Link>
+            <Button variant={"secondary"} asChild>
+              <Link href={"/resumes"}>Close </Link>
             </Button>
             <p className="text-muted-foreground opacity-0">Saving...</p>
           </div>
