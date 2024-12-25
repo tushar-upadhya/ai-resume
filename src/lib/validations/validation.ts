@@ -33,3 +33,14 @@ export const personalInfoSchema = z.object({
 });
 
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
+
+// RESUME SCHEMA
+export const resumeSchema = z.object({
+  ...generalInfoSchema.shape,
+  ...personalInfoSchema.shape,
+});
+
+export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
+  id?: string;
+  photo?: File | string | null;
+};

@@ -1,11 +1,31 @@
-import PersonalInfoForm from "@/components/forms/personal-info/PersonalInfoForm";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import React from "react";
+"use client";
+
+import Breadcrumbs from "@/components/bread-crumbs/Breadcrumbs";
+import Footer from "@/components/footer/Footer";
+import { steps } from "@/lib/steps/steps";
+import { ResumeValues } from "@/lib/validations/validation";
+import { useSearchParams } from "next/navigation";
+import React, { useState } from "react";
 
 const ResumeEditor: React.FC = () => {
+  const searchParams = useSearchParams();
+  const [resumeData, setResumeData] = useState<ResumeValues>({});
+
+  const currentStep = searchParams.get("step") || steps[0].key;
+
+  function setStep(key: string) {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("step", key);
+    window.history.pushState(null, "", `?${newSearchParams.toString()}`);
+  }
+
+  const FormComponent = steps.find(
+    (steps) => steps.key === currentStep,
+  )?.component;
+
   return (
-    <div className="flex min-h-[48rem] flex-col">
+    <div className="flex min-h-screen flex-col">
+      {/* HEADER */}
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
         <h1 className="text-2xl font-bold">Design your resume</h1>
         <p className="text-sm text-muted-foreground">
@@ -13,34 +33,30 @@ const ResumeEditor: React.FC = () => {
           saved automatically.
         </p>
       </header>
+
       {/* MAIN */}
-      <main className="relative grow">
-        <div className="absolute bottom-0 top-0 flex w-full">
-          <div className="w-full md:w-1/2">
-            <PersonalInfoForm />
+      <main className="grow overflow-auto">
+        <div className="flex w-full">
+          <div className="w-full space-y-6 p-3 md:w-1/2">
+            <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
+            {FormComponent && (
+              <FormComponent
+                resumeData={resumeData}
+                setResumeData={setResumeData}
+              />
+            )}
           </div>
 
           <div className="grow md:border-r" />
 
-          <div className="hidden w-1/2 md:flex">right</div>
+          <div className="hidden w-1/2 md:flex">
+            <pre>{JSON.stringify(resumeData, null, 2)}</pre>
+          </div>
         </div>
       </main>
 
       {/* FOOTER */}
-      <footer className="w-full border-t px-3 py-5">
-        <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <Button variant={"secondary"}>Previous Step</Button>
-            <Button>Next Step</Button>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button variant={"secondary"} asChild>
-              <Link href={"/resumes"}>Close </Link>
-            </Button>
-            <p className="text-muted-foreground opacity-0">Saving...</p>
-          </div>
-        </div>
-      </footer>
+      <Footer currentStep={currentStep} setCurrentStep={setStep} />
     </div>
   );
 };
