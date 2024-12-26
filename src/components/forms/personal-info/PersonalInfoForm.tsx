@@ -16,7 +16,7 @@ import {
   PersonalInfoValues,
 } from "@/lib/validations/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
@@ -38,11 +38,11 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
       const isValid = await form.trigger();
       if (!isValid) return;
       setResumeData({ ...resumeData, ...values });
-
-      // update
     });
     return unsubscribe;
   }, [form, resumeData, setResumeData]);
+
+  const photoInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">
@@ -64,11 +64,11 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
                       {...fieldValues}
                       type="file"
                       accept="image/*"
-                      // onChange={(e) => {
-                      //   const file = e.target.files?.[0];
-                      //   fieldValues.onChange(file);
-                      // }}
-                      // ref={photoInputRef}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        fieldValues.onChange(file);
+                      }}
+                      ref={photoInputRef}
                     />
                   </FormControl>
                   <Button

@@ -2,6 +2,7 @@
 
 import Breadcrumbs from "@/components/bread-crumbs/Breadcrumbs";
 import Footer from "@/components/footer/Footer";
+import ResumePreviewSection from "@/components/resume-preview/resume-preview-section/ResumePreviewSection";
 import { steps } from "@/lib/steps/steps";
 import { ResumeValues } from "@/lib/validations/validation";
 import { useSearchParams } from "next/navigation";
@@ -49,9 +50,13 @@ const ResumeEditor: React.FC = () => {
 
           <div className="grow md:border-r" />
 
-          <div className="hidden w-1/2 md:flex">
+          {/* <div className="hidden w-1/2 md:flex">
             <pre>{JSON.stringify(resumeData, null, 2)}</pre>
-          </div>
+          </div> */}
+          <ResumePreviewSection
+            resumeData={resumeData}
+            setResumeData={setResumeData}
+          />
         </div>
       </main>
 
