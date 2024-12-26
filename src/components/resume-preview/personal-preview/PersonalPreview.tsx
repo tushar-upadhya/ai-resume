@@ -1,3 +1,4 @@
+import { BorderStyles } from "@/components/border-style-button/BorderStyleButton";
 import { ResumeValues } from "@/lib/validations/validation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -7,8 +8,18 @@ interface PersonalPreviewProps {
 }
 
 const PersonalPreview = ({ resumeData }: PersonalPreviewProps) => {
-  const { photo, firstName, lastName, jobTitle, city, country, phone, email } =
-    resumeData;
+  const {
+    photo,
+    firstName,
+    lastName,
+    jobTitle,
+    city,
+    country,
+    phone,
+    email,
+    colorHex,
+    borderStyle,
+  } = resumeData;
 
   const [photoSrc, setPhotoSrc] = useState(photo instanceof File ? "" : photo);
 
@@ -28,14 +39,34 @@ const PersonalPreview = ({ resumeData }: PersonalPreviewProps) => {
           height={100}
           alt="Author photo"
           className="aspect-square object-cover"
+          style={{
+            borderRadius:
+              borderStyle === BorderStyles.SQUARE
+                ? "0px"
+                : borderStyle === BorderStyles.CIRCLE
+                  ? "9999px"
+                  : "10%",
+          }}
         />
       )}
       <div className="space-y-2.5">
         <div className="space-y-1">
-          <p className="text-3xl font-bold">
+          <p
+            className="text-3xl font-bold"
+            style={{
+              color: colorHex,
+            }}
+          >
             {firstName} {lastName}
           </p>
-          <p className="font-medium">{jobTitle}</p>
+          <p
+            className="font-medium"
+            style={{
+              color: colorHex,
+            }}
+          >
+            {jobTitle}
+          </p>
         </div>
         <p className="text-xs text-gray-500">
           {city}

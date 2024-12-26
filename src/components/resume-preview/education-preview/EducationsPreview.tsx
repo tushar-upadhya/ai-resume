@@ -5,7 +5,7 @@ interface EducationsPreviewProps {
   resumeData: ResumeValues;
 }
 const EducationsPreview = ({ resumeData }: EducationsPreviewProps) => {
-  const { educations } = resumeData;
+  const { educations, colorHex } = resumeData;
 
   const educationsNotEmpty = educations?.filter(
     (edu) => Object.values(edu).filter(Boolean).length > 0,
@@ -15,12 +15,22 @@ const EducationsPreview = ({ resumeData }: EducationsPreviewProps) => {
 
   return (
     <>
-      <hr className="border-2" />
+      <hr
+        className="border-2"
+        style={{
+          borderColor: colorHex,
+        }}
+      />
       <div className="space-y-3">
         <p className="text-lg font-semibold">Education</p>
         {educationsNotEmpty.map((edu, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
-            <div className="flex items-center justify-between text-sm font-semibold">
+            <div
+              className="flex items-center justify-between text-sm font-semibold"
+              style={{
+                color: colorHex,
+              }}
+            >
               <span>{edu.degree}</span>
               {edu.startDate && (
                 <span>
