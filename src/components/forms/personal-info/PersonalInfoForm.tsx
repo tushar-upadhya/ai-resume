@@ -74,12 +74,12 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
                   <Button
                     variant="secondary"
                     type="button"
-                    // onClick={() => {
-                    //   fieldValues.onChange(null);
-                    //   if (photoInputRef.current) {
-                    //     photoInputRef.current.value = "";
-                    //   }
-                    // }}
+                    onClick={() => {
+                      fieldValues.onChange(null);
+                      if (photoInputRef.current) {
+                        photoInputRef.current.value = "";
+                      }
+                    }}
                   >
                     Remove
                   </Button>

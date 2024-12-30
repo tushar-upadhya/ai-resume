@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { WorkExperienceValues } from "@/lib/validations/validation";
 import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { GripHorizontal } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 
@@ -32,7 +33,7 @@ const WorkExperienceItem = ({
     attributes,
     listeners,
     setNodeRef,
-    // transform,
+    transform,
     transition,
     isDragging,
   } = useSortable({ id });
@@ -44,7 +45,7 @@ const WorkExperienceItem = ({
       )}
       ref={setNodeRef}
       style={{
-        // transform: CSS.Transform.toString(transform),
+        transform: CSS.Transform.toString(transform),
         transition,
       }}
     >

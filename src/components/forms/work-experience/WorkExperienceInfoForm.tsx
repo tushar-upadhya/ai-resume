@@ -25,7 +25,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import WorkExperienceItem from "./WorkExperienceItem";
-
 const WorkExperienceInfoForm = ({
   resumeData,
   setResumeData,

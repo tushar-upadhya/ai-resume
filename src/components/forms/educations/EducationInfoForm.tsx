@@ -55,7 +55,7 @@ const EducationInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
     }),
   );
 
-  function handleDragEnd(event: DragEndEvent) {
+  function dragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -78,7 +78,7 @@ const EducationInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
+            onDragEnd={dragEnd}
             modifiers={[restrictToVerticalAxis]}
           >
             <SortableContext

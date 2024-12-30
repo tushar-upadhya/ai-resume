@@ -3,14 +3,28 @@
 import Breadcrumbs from "@/components/bread-crumbs/Breadcrumbs";
 import Footer from "@/components/footer/Footer";
 import ResumePreviewSection from "@/components/resume-preview/resume-preview-section/ResumePreviewSection";
+import useAutoSaveResume from "@/hooks/useAutoSaveResume";
+import useUnloadWarning from "@/hooks/useUnloadWarning";
+import { mapToResumeValues } from "@/lib/map-to-resume-values/mapToResumeValues";
 import { steps } from "@/lib/steps/steps";
+import { ResumeServerData } from "@/lib/type/types";
+import { cn } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validations/validation";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 
-const ResumeEditor: React.FC = () => {
+interface ResumeEditorProps {
+  resumeToEdit: ResumeServerData | null;
+}
+const ResumeEditor = ({ resumeToEdit }: ResumeEditorProps) => {
   const searchParams = useSearchParams();
-  const [resumeData, setResumeData] = useState<ResumeValues>({});
+  const [resumeData, setResumeData] = useState<ResumeValues>(
+    resumeToEdit ? mapToResumeValues(resumeToEdit) : {},
+  );
+
+  const [showSmResumePreview, setShowSmResumePreview] = useState(false);
+  const { hasUnSavedChanges, isSaving } = useAutoSaveResume(resumeData);
+  useUnloadWarning(hasUnSavedChanges);
 
   const currentStep = searchParams.get("step") || steps[0].key;
 
@@ -23,6 +37,8 @@ const ResumeEditor: React.FC = () => {
   const FormComponent = steps.find(
     (steps) => steps.key === currentStep,
   )?.component;
+
+  // useUnloadWarning();
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -38,7 +54,12 @@ const ResumeEditor: React.FC = () => {
       {/* MAIN */}
       <main className="grow overflow-auto">
         <div className="flex w-full">
-          <div className="w-full space-y-6 p-3 md:w-1/2">
+          <div
+            className={cn(
+              "w-full space-y-6 p-3 md:block md:w-1/2",
+              showSmResumePreview && "hidden",
+            )}
+          >
             <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
             {FormComponent && (
               <FormComponent
@@ -56,12 +77,19 @@ const ResumeEditor: React.FC = () => {
           <ResumePreviewSection
             resumeData={resumeData}
             setResumeData={setResumeData}
+            className={cn(showSmResumePreview && "flex")}
           />
         </div>
       </main>
 
       {/* FOOTER */}
-      <Footer currentStep={currentStep} setCurrentStep={setStep} />
+      <Footer
+        currentStep={currentStep}
+        setCurrentStep={setStep}
+        showSmResumePreview={showSmResumePreview}
+        setShowSmResumePreview={setShowSmResumePreview}
+        isSaving={isSaving}
+      />
     </div>
   );
 };

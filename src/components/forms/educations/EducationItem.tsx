@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { EducationValues } from "@/lib/validations/validation";
 import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { GripHorizontal } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 
@@ -25,7 +26,7 @@ const EducationItem = ({ id, form, index, remove }: EducationItemProps) => {
     attributes,
     listeners,
     setNodeRef,
-    // transform,
+    transform,
     transition,
     isDragging,
   } = useSortable({ id });
@@ -37,7 +38,7 @@ const EducationItem = ({ id, form, index, remove }: EducationItemProps) => {
       )}
       ref={setNodeRef}
       style={{
-        // transform: CSS.Transform.toString(transform),
+        transform: CSS.Transform.toString(transform),
         transition,
       }}
     >
